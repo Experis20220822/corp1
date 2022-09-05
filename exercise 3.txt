@@ -1,0 +1,53 @@
+In this exercise, we will use a predefined function and then use it in expressions. This exercise will show how you can invoke, check, and return the data type, and use functions in expressions. For the purpose of this exercise, we will use a function defined as getDiceRoll. Let's get started:
+
+Open the use-functions.html document in your web browser.
+Open the web developer, console window, using your web browser.
+The web page has a function named getDiceRoll. It returns the value of one rolled dice. It has one argument. The argument allows you to supply the number of dice to roll. Type the items on the lines beginning with the > symbol. The console window will show a response on the lines beginning with the <· symbol.
+
+Express the data type. Note that a function name without parentheses is used:
+> typeof getDiceRoll
+
+\\Expressed as a function type. It also assures us that there is a function.
+
+<·function
+
+Express the return value data type. Note that a function name with parentheses is used:
+> typeof getDiceRoll()
+
+\\Function return value is a number. We do not see the actual value.
+
+<·"number"
+
+Invoke the function using the following code:
+> getDiceRoll()
+
+\\Your value will be 1 to 6. Repeat a few times.
+
+<·3
+
+We can also invoke functions in math expressions.
+
+Invoke the function in a math expression:
+> 100 * getDiceRoll()
+
+\\Your value will be 100 to 600 Repeat a few times.
+
+<·300
+
+We can also invoke functions in a comparison expression.
+
+Invoke the function in a comparison expression:
+> getDiceRoll() == 4
+
+\\You may need to repeat a few times to get a true result.
+
+<·true
+
+So far, we haven't passed any arguments for our functions. However, remember that we do have the option to do so as our function is defined to accept a single argument. This argument defines the number of dices that will be rolled. Let's try passing an argument in the next step.
+
+Invoke and supply the argument for the number of dice to roll as 2:
+> getDiceRoll(2)
+
+\\You will receive values from 2 to 12.
+
+<·11
