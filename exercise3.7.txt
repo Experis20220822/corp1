@@ -1,0 +1,308 @@
+In this exercise, we will build a simple game that generates four random game numbers from 1 to 21 inclusive. One is the player's score, one is the target score, one is a lucky score, and the last is an unlucky score. The player gets a wallet of 20 times the player's score. There are five possible outcomes, with each assigning different wins or losses to the player's wallet:
+
+The player's score matches the lucky score, and the lucky score and the unlucky score are different. The wallet is increased by the lucky value plus the player's score times 10.
+The player's score equals the unlucky score, and the lucky score and the unlucky score are different. The wallet is reduced to zero.
+The player's score equals the target score. The wallet is increased by the difference between 21 and the target score times 10.
+The player's score beats the target score. The wallet is increased by the difference between the player's score and the target score times 10.
+The target score beats the player's score. The wallet is decreased by the difference between the target score and the player's score times 10.
+The steps for completion are as follows:
+
+Open the if-else-if-else-statements.html document in your web browser.
+Open the web developer console window using your web browser.
+Open the if-else-if-else-statements.js document in your code editor, replace all of its content with the following code, and then save it:
+var target = Math.floor(Math.random() * 21) + 1;
+
+var player = Math.floor(Math.random() * 21) + 1;
+
+console.log("Target score:", target);
+
+console.log("Player score:", player);
+
+if (player >= target){
+
+ console.log("Player wins: beats target by " + (player - target));
+
+}else{
+
+ console.log("Player loses: misses target by " + (target - player));
+
+}
+
+We will start by matching the target or exceeding it using the if statement block, if (player >= target). The else statement block stating "Player loses: misses target by" covers being below the target.
+
+Reload the if-else-if-else-statements.html web page in your web browser with the console window open. Repeat until you see a version for each of these three examples.
+An example of the player's score exceeding the target is as follows:
+
+Target score: 5
+
+Player score: 13
+
+Player wins: beats target by 8
+
+The following is an example of the player's score matching the target. In this case, the message is not supporting the logic:
+
+Target score: 14
+
+Player score: 14
+
+Player wins: beats target by 0
+
+An example of the target exceeding the player's score is as follows:
+
+Target score: 19
+
+Player score: 1
+
+Player loses: misses target by 18
+
+Now, we can add a code some handle the player matching the target.
+
+Edit the if-else-if-else-statements.js document, add the following bolded code:
+console.log("Player score:", player);
+
+if (player == target){
+
+ console.log("Player wins: ties target " + target);
+
+}else if (player > target){
+
+ console.log("Player wins: beats target by " + (player - target));
+
+}else{
+
+A new if statement block is added to handle the condition when the player ties with the target. The original if statement block is replaced with an else...if statement block that only tests for conditions when the player's value exceeds the target.
+
+Reload the if-else-if-else-statements.html web page in your web browser with the console window open. Repeat this until you see a version for each of these three examples.
+An example of a player's score exceeding the target is as follows:
+
+Target score: 7
+
+Player score: 14
+
+Player wins: beats target by 7
+
+The following is an example of a player matching the target. In this case, the message is not supporting the logic:
+
+Target score: 3
+
+Player score: 3
+
+Player wins: ties target 3
+
+An example of the target exceeding the player's score is as follows:
+
+Target score: 10
+
+Player score: 5
+
+Player loses: misses target by 5
+
+Edit the if-else-if-else-statements.js document, update it using the following bolded code, and then save it.
+A variable for the lucky and unlucky number are added and are output to the console so that we can observe them:
+
+var target = Math.floor(Math.random() * 21) + 1;
+
+var player = Math.floor(Math.random() * 21) + 1;
+
+var lucky = Math.floor(Math.random() * 21) + 1;
+
+var unlucky = Math.floor(Math.random() * 21) + 1;
+
+console.log("Target score:", target);
+
+console.log("Player score:", player);
+
+console.log("Lucky score:", lucky);
+
+console.log("Unlucky score:", unlucky);
+
+Next, we add an if statement block when the lucky value does not match the unlucky value and the player value matches the lucky value. The use of the logical && operator handles the two required tests, both of which need to be true.
+This condition preempts the other winning and losing condition if statements, so it needs to precede them. Add the following bolded code:
+
+if (lucky != unlucky && player == lucky){
+
+ console.log("Player wins: matches lucky score.");
+
+}else if (player == target){
+
+ console.log("Player wins: ties target " + target);
+
+}
+
+We also want a condition when the lucky value does not match the unlucky value, and the player value matches the unlucky value. Again, the use of the logical && operator handles the two required tests, both of which need to be true.
+This condition preempts the other winning and losing condition if statements, so it needs to precede them. Insert the following bolded code:
+
+if (lucky != unlucky && player == lucky){
+
+ console.log("Player wins: matches lucky score.");
+
+}else if (lucky != unlucky && player == unlucky){
+
+ console.log("Player loses: matches unlucky score.");
+
+}else if (player == target){
+
+Reload the if-else-if-else-statements.html web page in your web browser with the console window open. Repeat this until you see a version for each of these two examples.
+The following is an example of a player matching the lucky number, but not the unlucky number:
+
+Target score: 7
+
+Player score: 14
+
+Lucky score: 16
+
+Unlucky score: 20
+
+Player wins: matches lucky score
+
+The following is an example of a player matching the unlucky number, but not the lucky number:
+
+Target score: 4
+
+Player score: 9
+
+Lucky score: 3
+
+Unlucky score: 9
+
+Player loses: matches unlucky score.
+
+Edit the if-else-if-else-statements.js document, update it with the following bolded code, and then save it.
+The initial wallet value is 20 times the player's score. It is displayed along with the other game data:
+
+var unlucky = Math.floor(Math.random() * 21) + 1;
+
+var wallet = player * 20;
+
+console.log("Target score:", target);
+
+console.log("Unlucky score:", unlucky);
+
+console.log("Player initial wallet:", wallet);
+
+If there is a match with the lucky number, the wallet is increased by the player's score and the lucky score times 10.
+
+if (lucky != unlucky && player == lucky){
+
+ console.log("Player wins: matches lucky score.");
+
+ wallet += (lucky + player) * 10;
+
+If there is a match with the unlucky number, the wallet is decreased to zero:
+
+}else if (lucky != unlucky && player == unlucky){
+
+ console.log("Player loses: matches unlucky score.");
+
+ wallet = 0;
+
+If the player's score matches the target, the wallet is increased by the difference between 21 and the target:
+
+}else if (player == target){
+
+ console.log("Player wins: ties target " + target);
+
+ wallet += (21 - target) * 10;
+
+If the player's score exceeds the target, the wallet is increased by the difference times 10:
+
+}else if (player > target){
+
+ console.log("Player wins: beats target by " + (player - target));
+
+ wallet += (player - target) * 10;
+
+The else statement block reduces the wallet by the difference between the target and the player. It ties 10, but not below zero.
+
+After the if, if else, and else block statements, the player's final wallet is displayed:
+
+}else{
+
+ console.log("Player loses: misses target by " + (target - player));
+
+ wallet = Math.max(0, wallet - (target - player) * 10);
+
+}
+
+console.log("Player final wallet:", wallet);
+
+Reload the if-else-if-else-statements.html web page in your web browser with the console window open. Repeat this until you see a version for each of these examples.
+The following is an example of the target exceeding the player's score and the amount being deducted from the wallet exceeding the wallet balance. In this case, the wallet is reduced to zero:
+
+Target score: 4
+
+8 Player score: 1
+
+Lucky score: 6
+
+Unlucky score: 4
+
+Player initial wallet: 20
+
+Player loses: misses target by 3
+
+Players final wallet: 0
+
+The following is an example of the player's score exceeding the target score. The wallet increased by 10 times the difference exceeded:
+
+Target score: 10
+
+Player score: 18
+
+Lucky score: 21
+
+Unlucky score: 10
+
+Player initial wallet: 360
+
+Player wins: beats target by 8
+
+Players final wallet: 440
+
+The following is an example of the player's score matching the target score. The wallet increased by 10 times the difference of 21 and the target:
+
+Target score: 19
+
+Player score: 19
+
+Lucky score: 4
+
+Unlucky score: 7
+
+Player initial wallet: 380
+
+Player wins: ties target 19
+
+Players final wallet: 400
+
+The following is an example of the player matching the lucky number, but not the unlucky number. The wallet is increased by the player and the target times 10:
+
+Target score: 19
+
+Player score: 1
+
+Lucky score: 1
+
+Unlucky score: 7
+
+Player initial wallet: 20
+
+Player wins: matches lucky score.
+
+Players final wallet: 40
+
+The following is an example of the player matching the unlucky number, but not the lucky number. The wallet is reduced to 0:
+
+Target score: 8
+
+Player score: 13
+
+Lucky score: 10
+
+Unlucky score: 13
+
+Player initial wallet: 260
+
+Player loses: matches unlucky score.
+
+Players final wallet: 0
