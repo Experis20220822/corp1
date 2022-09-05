@@ -1,0 +1,150 @@
+exercise 2.txt
+
+Open the web developer console window using your web browser.
+In the next couple of steps, we will implement a few expressions using number data and arithmetic operators. Type the items on the lines beginning with the > symbol. The console window will show a response on the lines beginning with the < symbol.
+
+Write the following code to add two literal whole numbers:
+> 200 + 200
+
+\\output
+
+< 400
+
+Write the following code to divide the literal whole numbers:
+> 1000 / 4
+
+\\Output
+
+< 250
+
+Now, write the following code to divide a real number by a whole number:
+> 150.75 / 3
+
+\\Output
+
+< 50.25
+
+Multiplication has a higher order of operator precedence, which is demonstrated with the following code:
+> 100 + 100 * 2
+
+\\Output
+
+< 300
+
+We can use parentheses to change the order of operational precedence, as shown here:
+> (100 + 100) * 2
+
+\\Output
+
+< 400
+
+To show the data type of a real number, we can use typeof, as shown here:
+>typeof 987.123
+
+\\Output
+
+< "number"
+
+Let's try the following command:
+> 123 456 789
+
+\\Output
+
+< Uncaught SyntaxError: Unexpected number
+
+The output is a syntax error because you cannot have a number in this format with spaces (123 456 789 is not recognized as a number, but 123456789 is).
+
+We can compare two whole numbers using the > operator, as shown here:
+> 100 > 200
+
+\\Output
+
+< false
+
+Similarly, we can compare two whole numbers using the < operator:
+> 100 < 200
+
+\\Output
+
+< true
+
+Now, we can switch over and work with string data. Let's have a look at the output when we enter a literal string using double quotes as a delimiter:
+> "Albert Einstein"
+
+\\Output
+
+< "Albert Einstein"
+
+The next couple of snippets will show different examples of using literal strings.
+
+Using a literal string without delimiters would result in an error since JavaScript would not recognize such an input:
+> Albert Einstein
+
+\\Output
+
+< Uncaught SyntaxError: Unexpected identifier
+
+You can use a literal string using double-quotes. Suppose you want to return the statement in double-quotes. You can place the double quotes in between a single quote:
+> 'The quote "The only source of knowledge is experience" is attributed to Albert Einstein'
+
+\\Output
+
+< The quote "The only source of knowledge is experience" is attributed to Albert Einstein
+
+Use the \ escape character to use a delimiter. This turns special characters into string characters:
+> "The quote \"The only source of knowledge is experience\" is attributed to Albert Einstein"
+
+\\Output. Notice the escape character is removed.
+
+< The quote "The only source of knowledge is experience" is attributed to Albert Einstein
+
+A non-mathematic number such as a phone number without delimiters will be converted into a number:
+> 123-456-7890
+
+\\Output. Expression converted to number
+
+< -8223
+
+A non-mathematic number such as a phone number will appear as follows because we are using "":
+> "123-456-7890"
+
+\\Output
+
+< "123-456-7890"
+
+We can also combine numbers and a literal string, as shown here:
+> 100 - 10 + " Main Street"
+
+\\Output.
+
+< "90 Main Street"
+
+When string is in expression JavaScript attempts to convert all other elements to a string.
+
+We can use the == operator to compare two strings with the same case:
+> "Albert Einstein" == "Albert Einstein"
+
+\\Output
+
+< true
+
+Now, let's try comparing two strings with a different case:
+> "Albert Einstein" == "ALBERT EINSTEIN"
+
+\\Output
+
+< false
+
+When we compare a number with a string with the same numeric value using the == operator, data type conversion takes place. This is shown in the following snippet:
+> 100 == "100"
+
+\\Output. Data type conversion takes place
+
+< true
+
+If we want data type conversion to not take place before the comparison is made, we need to use the === operator, as shown here:
+> 100 === "100"
+
+\\Output. No data type conversion
+
+< false
