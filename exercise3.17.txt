@@ -1,0 +1,174 @@
+This exercise will accept an input value from a web page that aims to guess a number from 1 to 10. A button is used to check the input value against a random number that's generated from 1 to 10. Depending on whether there's a match, the display property of the other elements on the web page is toggled to hide or show the element. Also, the number that's generated is displayed on the page. Let's get started:
+
+Open the number-guess.html document in your web browser.
+Open the web developer console window using your web browser.
+First, we can start with the web browser document object.
+Type the items on the lines beginning with the > symbol. The console window will show a response on the lines beginning with the <· symbol.
+Open the number-guess.html document in your code editor.
+Let's review some of the elements that will be accessed in JavaScript. First is the input element, which is used for entering the guess value. Note that its id attribute value is number-guessed. We are going to use the id attributes to get access to all the elements we use in JavaScript:
+
+<input id="number-guessed" type="text" maxlength="2">
+
+The next is the button element. The id attribute is test-button:
+
+<button id="test-button">Test Your Guess</button>
+
+The next is the p element. The id attribute is results-msg. This is the container for all the result messages. It has a class value of hidden. The number-guess.css file has the display property set to none for the hidden class:
+
+.hidden{
+
+ display:none;
+
+}
+
+When the web page loads, this p element is not shown. The JavaScript will either hide or unhide this element:
+
+<p id="results-msg" class="hidden">...</p>
+
+Inside the p element, there are two span elements that contain the message for a guess that either matches or does not. They also use the hidden class. This is because, if their parent element is unhidden, these remain hidden until the code determines which to unhide. Each span element has an id attribute. The JavaScript will either hide or unhide each of these span elements:
+
+<span id="match-msg" class="hidden">Congratulations!</span><span id="no-match-msg" class="hidden">Sorry!</span>
+
+One more element inside the p element is a span element to show the number to guess. The JavaScript will update this:
+
+<span id="number-to-guess"></span>
+
+Open the number-guess.js document in your code editor, replace all of its content with the following code, and then save it.
+The first line creates an object for the element with idtest-button using the document object's getElementByID method.
+
+The second line adds the function named testMatch as the listener for the click event on the button.
+
+The following is the testMatch function and a message to the console so that we can test it:
+
+let testButtonEle = document.getElementById('test-button');
+
+testButtonEle.addEventListener('click', testMatch);
+
+function testMatch(e){
+
+ console.log("Clicked!");
+
+}
+
+Reload the number-guess.html web page in your web browser with the console window open and click the Test Your Guess button.
+You should see the following message in the console window:
+
+Clicked!
+
+Edit the number-guess.js document and then save it.
+At the top of the file, all the elements we need to access in the HTML have been assigned to a variable:
+
+let resultsMsgEle = document.getElementById('results-msg');
+
+let matchedMsgEle = document.getElementById('match-msg');
+
+let noMatchMsgEle = document.getElementById('no-match-msg');
+
+let numberToGuessEle = document.getElementById('number-to-guess');
+
+let guessInputEle = document.getElementById('number-guessed');
+
+let testButtonEle = document.getElementById('test-button');
+
+Next, add the DOM interface to get the value property from the input element's guessInputEle object. In case the user did not enter an integer, the parseInt JavaScript built-in function will flag that as not a number. Then, the if statement expression is true only if the number is between 1 and 10 inclusive:
+
+function testMatch(e){
+
+ let numberGuessed = parseInt(guessInputEle.value);
+
+ if(!isNaN(numberGuessed) &&numberGuessed> 0 &&numberGuessed<= 10){
+
+ }
+
+}
+
+In the if statement block, the first step is to get a random integer from 1 to 10. Then, we use an if...else statement block if the input number matches the generated number.
+
+For now, we can test this with outputs to the console window:
+
+ if(!isNaN(numberGuessed) &&numberGuessed> 0 &&numberGuessed<= 10){
+
+  let numberToGuess = Math.floor(Math.random() * 10 + 1);
+
+  if (numberGuessed == numberToGuess){
+
+   console.log("MATCHED!");
+
+  }else{
+
+   console.log("NOT MATCHED!");
+
+  }
+
+  console.log("Number guessed:", numberGuessed);
+
+  console.log("Number to match:", numberToGuess);
+
+ }
+
+Reload the number-guess.html web page in your web browser with the console window open, enter an integer from 1 to 10, and click the Test Your Guess button a few times.
+Here are two test results:
+
+NOT MATCHED!
+
+Number guessed: 1
+
+Number to match: 9
+
+MATCHED!
+
+Number guessed: 1
+
+Number to match: 1
+
+Try invalid values such as letters. There should be no output to the console.
+
+Edit the number-guess.js document, update it using the bolded text, and then save it.
+Now, we can add in the steps for updating the DOM elements with the results. To start, all the result elements are hidden when the button is clicked:
+
+function testMatch(e){
+
+ matchedMsgEle.style.display = 'none';
+
+ noMatchMsgEle.style.display = 'none';
+
+ resultsMsgEle.style.display = 'none';
+
+ let numberGuessed = parseInt(guessInputEle.value);
+
+First, the hidden container for the message elements is displayed. Then, depending on whether there is a match or not, the element showing that result is displayed. Finally, the number to guess is updated in the element that was created for it:
+
+ if(!isNaN(numberGuessed) &&numberGuessed> 0 &&numberGuessed<= 10){
+
+  resultsMsgEle.style.display = 'block';
+
+  let numberToGuess = Math.floor(Math.random() * 10 + 1);
+
+  if (numberGuessed == numberToGuess){
+
+   matchedMsgEle.style.display = 'inline';
+
+  }else{
+
+   noMatchMsgEle.style.display = 'inline';
+
+  }
+
+  numberToGuessEle.innerText = numberToGuess;
+
+ }
+
+Reload the number-guess.html web page in your web browser with the console window open and repeatedly click the Test Your Guess button with a value entered.
+The result of a matching output is as follows:
+
+Figure 3.13: Matched value 
+Figure 3.13: Matched value
+
+The result of a non-matching output is as follows:
+
+Figure 3.14: Non matched value
+Figure 3.14: Non matched value
+
+Now type AA and you will see the following output of this invalid entry:
+
+Sorry! The number to guess was invalid
