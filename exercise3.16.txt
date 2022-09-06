@@ -1,0 +1,49 @@
+Exercise 3.16: Writing an Arrow Function and Invoking It
+This exercise will show you how to convert a function expression into an arrow function. The JavaScript file we'll be using already contains the function. Let's get started:
+
+Open the function-arrow.html document in your web browser.
+Open the web developer console window using your web browser.
+Reload the function-arrow.html web page in your web browser with the console window open.
+The first, second from last, and last results are an empty string. The second, third, and fourth results show a random character from the string:
+
+():
+
+("AEIOU"): U
+
+("124678"): 6
+
+("JavaScript"): a
+
+(124678):
+
+(true):
+
+Open the function-arrow.js document in your code editor, make changes to the bolded lines, and then save it:
+let getRandomStringCharacter = (source) => {
+
+ let returnCharacter = '';
+
+ if (source !=undefined &&source.length> 0){
+
+returnCharacter = source.charAt(Math.floor(Math.random() * source.length));
+
+ }
+
+ return returnCharacter;
+
+}
+
+Reload the function-arrow.html web page in your web browser with the console window open.
+The results are the same. The first, second from last, and last results are an empty string. The second, third, and fourth results show a random character from the string:
+
+():
+
+("AEIOU"): I
+
+("124678"): 2
+
+("JavaScript"): J
+
+(124678):
+
+(true):
