@@ -1,0 +1,112 @@
+Exercise 3.15: Writing a Function as an Expression and Invoking It
+This exercise defines a function as an expression and then uses it.
+
+The function returns a single random character from a string. The string is the function's only parameter. If the parameter is not a string or is an empty string, then an empty string is returned. Let's get started:
+
+Open the function-expression.html document in your web browser.
+Open the web developer console window using your web browser.
+create the function-expression.js document in your code editor, enter the following code, and then save it.
+The function, as a literal value, is assigned to the getRandomStringCharacter variable.
+
+Then, the variable is displayed in the console. Remember, a function is not invoked unless you include parentheses:
+
+let getRandomStringCharacter = function(source){
+
+ let returnCharacter = '';
+
+ console.log("source:", source);
+
+ return returnCharacter;
+
+}
+
+console.log('getRandomStringCharacter', getRandomStringCharacter);
+
+Reload the function-expression.html web page in your web browser with the console window open. The actual function is displayed but not invoked, as expected:
+getRandomStringCharacter ƒ (source){
+
+ let returnCharacter = '';
+
+ console.log("source:", source);
+
+ return returnCharacter;
+
+}
+
+Edit the function-expression.js document, update the lines with the following bolded text, and then save it.
+Now, we will invoke the function:
+
+ return returnCharacter;
+
+}
+
+getRandomStringCharacter();
+
+getRandomStringCharacter("AEIOU");
+
+Reload the function-expression.html web page in your web browser with the console window open.
+The console.log statement in the function displays the source parameter value for each invocation. No parameter was passed in the first invocation. The source parameter data type is undefined:
+
+source: undefined
+
+source: AEIOU
+
+Edit the function-expression.js document, add the following text above the function, and then save it.
+Now, we will invoke the function before it is defined:
+
+getRandomStringCharacter();
+
+let getRandomStringCharacter = function(source){
+
+ let returnCharacter = '';
+
+Reload the function-expression.html web page in your web browser with the console window open.
+You should see an error in the console. Functions that are defined as expressions cannot be invoked before they are defined:
+
+Uncaught TypeError: getRandomStringCharacter is not a function
+
+    at function-expression.js:1
+
+Edit the function-expression.js document, update the bolded text, and then save it.
+We can remove the line that invokes the function before it is defined and finish coding the function. The if block tests whether the source parameter is not undefined and contains characters. In the if block, the Math.floor(Math.random() * source.length expression finds a random character position as a value from 0 to the length of the source parameter minus 1. The charAt string method extracts the character at that position it will be returned at:
+
+let getRandomStringCharacter = function(source){
+
+ if (source !=undefined &&source.length> 0){
+
+  returnCharacter = source.charAt(Math.floor(Math.random() * source.length));
+
+ }
+
+ return returnCharacter;
+
+}
+
+These lines are a set of tests of various source values. The first passes no parameter. The second, third, and fourth pass a string. The fifth is passing a number and the last is passing a Boolean:
+
+console.log('():', getRandomStringCharacter());
+
+console.log('("AEIOU"):', getRandomStringCharacter('AEIOU'));
+
+console.log('("JavaScript"):', getRandomStringCharacter('JavaScript'));
+
+console.log('("124678"):', getRandomStringCharacter('124678'));
+
+console.log('(124678):', getRandomStringCharacter(124678));
+
+console.log('(true):', getRandomStringCharacter(true));
+
+Reload the function-expression.html web page in your web browser with the console window open.
+The function's output expects a random character in the source parameter. If it is not empty, it will return a string and will return an empty string for all other values. Reload the web page a few times to get different test results:
+
+():
+
+("AEIOU"): U
+
+("124678"): 6
+
+("JavaScript"): a
+
+(124678):
+
+(true):
