@@ -1,0 +1,70 @@
+Exercise 6.04: Conditional Event Prevention
+In this exercise, you will create a group of links. Each link, when clicked, will raise a click event. Above these links, the containing div will listen for the event each one raises and will determine if it should stop the event propagation, stop its action, or stop both. Let's get started:
+
+Let's start by creating a document called ev-prev.html and adding some HTML code:
+<html>
+
+  <body>
+
+    <div id="container">
+
+      <a href="https://google.com">Google</a>
+
+      <a href="https://bing.com">Bing</a>
+
+      <a href="https://yahoo.com">Yahoo</a>
+
+    </div>
+
+    <div id="message"></div>
+
+  </body>
+
+Here, we have a container with three links and a secondary container for output messages.
+
+Next, open a script tag for the JavaScript and create variables to reference the link container, the links themselves, and the message container:
+  <script>
+
+    var container = document.getElementById("container"),
+
+        links = container.children,
+
+        msg = document.getElementById("message");
+
+When each link is clicked, we want a message to display, showing which link was clicked. Therefore, we will attach an event listener to the link container so that when the events bubble up, the handler will be there to catch the event object and identify which link dispatched the event:
+    container.addEventListener("click", function(ev) {
+
+      msg.innerHTML = `${ev.target.text} clicked`;
+
+      console.log(`${ev.target.text} clicked`);
+
+    });
+
+Then, we will add a behavior for each link. The first will prevent actions, the second will stop propagation, and the third will do both:
+    links[0].addEventListener("click", function(ev) {
+
+      ev.preventDefault();
+
+    });
+
+    links[1].addEventListener("click", function(ev) {
+
+      ev.stopPropagation();
+
+    });
+
+    links[2].addEventListener("click", function(ev) {
+
+      ev.preventDefault();
+
+      ev.stopPropagation();
+
+    });
+
+Finally, close out the script tag and html tag:
+  </script>
+
+</html>
+
+By running this page in a browser, you should see that the first link will print Google clicked in the message container, the second will redirect the user to the Bing website, and the third will do nothing at all. When clicking the second link, the message is never displayed because the event propagation is stopped in the handler.
+You have now successfully marshaled events and caught them as they bubbled up through the node tree
