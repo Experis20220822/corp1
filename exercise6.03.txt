@@ -1,0 +1,59 @@
+Exercise 6.03: Tabbed Content
+In this exercise, you'll use what you have learned so far to create a tabbed display. The display will utilize three buttons at the top of the page, with a container div tag at the bottom. When a button is pressed, content associated with the button handler will be displayed within the container div tag. Let's get started:
+
+First, create a new document called tabs.html and add the starting HTML:
+<html>
+
+  <head>
+
+    <title>Tabbed Display</title>
+
+  </head>
+
+  <body>
+
+The three buttons will sit side by side in a single container div. Each one will have a unique ID so that we can easily reference them:
+    <div>
+
+      <button id="btn1">Tab One</button>
+
+      <button id="btn2">Tab Two</button>
+
+      <button id="btn3">Tab Three</button>
+
+    </div>
+
+Next, add the container div. We'll add a descriptive body to inform the user of the page. However, once a button has been pressed, that content will disappear for good and will be replaced by dynamic content:
+    <div id="container">Click a button!</div>
+
+With the structure of the page in place, you can now close out the body and begin the script block:
+  </body>  <script>    let btn1 = document.getElementById("btn1"),
+
+      btn2 = document.getElementById("btn2"),
+
+      btn3 = document.getElementById("btn3"),
+
+      container = document.getElementById("container");
+
+Here, we've created a variable for each element in the page we need to interact with. This makes the code neater and cleaner.
+
+Next, you'll need some content to add when the buttons are pressed, one for each button:
+    let content1 = "Button 1 was pressed",
+
+      content2 = "Button 2 was pressed",
+
+      content3 = "Button 3 was pressed";
+
+Now, we need to wire up the content. To do this, simply add an event listener to each button, updating the container div content in each one:
+    btn1.addEventListener("click", () => container.innerHTML = content1);
+
+    btn2.addEventListener("click", () => container.innerHTML = content2);
+
+    btn3.addEventListener("click", () => container.innerHTML = content3);
+
+Now, simply close out the open tags and save the page:
+  </script>
+
+</html>
+
+That's it. If you now run the page in your browser and click each button, you should see that the content has been updated.
