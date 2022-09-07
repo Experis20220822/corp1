@@ -1,0 +1,40 @@
+Exercise 6.01: Custom Timer
+As we mentioned previously, many developers coming from lower-level languages will consider a loop as a means to create timed function invocations. If a loop can occur indefinitely, then we only need to check the current system time and invoke functions when sufficient time has passed. For instance, when animating, in order to control the speed of the animation, you may want to ensure your frame update functions are executed with a sufficient period of time between each invocation. Without this control, your animation frames will update with every possible cycle of the JavaScript runtime, which may be very fast on some machines, while not so fast on weaker machines. In this exercise, you will implement one such loop. Let's get started:
+
+To begin, you'll need three variables. The first will store the current time in milliseconds for each iteration, the second variable will contain the time in milliseconds of the last time the custom timer function executed, and the third variable will be the required minimal interval between timer function calls in milliseconds:
+var curTime, lastTime,
+
+  interval = 500;
+
+Next, we open the main function and the indefinite loop. Similar to the preceding example, we'll simply use a while loop and pass it a decrementing value:
+function main() {  // primary function
+
+  let running = true;  // loop running flag
+
+  while (running) {  // enter loop
+
+Now, the first thing that needs to happen with each iteration is that we need to get the current time in milliseconds and compare it to the last stored time:
+    curTime = new Date().getTime();
+
+    lastTime = lastTime || curTime;
+
+    if (curTime - lastTime > interval) {
+
+The lastTime variable, if it is null, will be passed the value of curTime. This way, it will execute correctly from its first iteration since null cannot be deducted from an integer.
+
+If the values are sufficiently different (greater than the interval amount), you can invoke your timed functions. You will then need to update the lastTime variable to equal the current time so that the function doesn't execute again in succession and instead waits for the next duration to occur:
+      console.log(curTime);
+
+      lastTime = curTime;
+
+Finally, you close out the conditional, loop, and function:
+    }
+
+  }
+
+}
+
+That's it. If you execute the function by calling main(), you will see the current time in milliseconds output to the console every 500 milliseconds:
+main(); // ==> 1558632112316
+
+What you have just created is similar to an application loop. Many programming languages support the notion of an application loop. In fact, languages such as C++ require such a loop in order to prevent an application from exiting. In such circumstances, the loop is a simple "keep-alive" mechanism whereby checks for potential events occur manually within the loop. In JavaScript, such loops are unnecessary. This is because the JavaScript engine already enlists the help of such a loop under the hood, known as the event loop.
