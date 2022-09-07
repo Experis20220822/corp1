@@ -1,0 +1,85 @@
+Exercise 7.01: Working with the Event Loop
+Let's take a look at how we can apply this knowledge to a more realistic (albeit simple) application. The goal of this exercise is to illustrate how the event loop can produce some unexpected behavior in our applications and also to see how we can work with the event loop to give useful functionality to our apps. Let's get started:
+
+We'll have an HTML file with two <div> elements in the body with IDs of status and result. The purpose of the application is going to be to run a function and display the result in the result div. We know that our function will take a not-insignificant amount of time to run, so we will also incorporate a status feature so as to keep the user aware of what's happening in the application. For this example, our main function will be an arbitrary calculation that takes a few seconds to complete. In real life, this could be any kind of complex calculation, or a function for fetching data from an external source, such as a database or an API. Load the index.html file:
+<!-- index.html -->
+
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <script src='event-loop.js'></script>
+
+  </head>
+
+  <body>
+
+    <span id='status'></span>
+
+    <span id='result'></span>
+
+  </body>
+
+</html>
+
+In a separate JavaScript file, called event-loop.js, we'll write a collection of functions to make up our application. First, we're adding an event listener to the window object so that the rest of the code won't run until the DOM's content has loaded (DOMContentLoaded is triggered when the browser completes the DOM tree structure, not including any style sheets or images):
+// event-loop.js
+
+document.addEventListener('DOMContentLoaded', () => {
+
+After this, we are assigning our two <span> elements with the IDs of status and result to two aptly named variables:
+  let statusSpan = document.getElementById('status');
+
+  let resultSpan = document.getElementById('result');
+
+Next, we are defining two functions, showStatus() and doCalculation(). The showStatus() function takes in an argument of statusText, which will be set to the innerText property of statusSpan, thereby displaying whatever text we pass to showStatus() on the page:
+  let showStatus = (statusText) => {
+
+    statusSpan.innerText = statusText;
+
+  };
+
+The other function, doCalculation(), runs our calculation and then sets the result to the innerText property of the resultSpan variable:
+  let doCalculation = () => {
+
+    let result = 0;
+
+    for(var i = 0; i< 10000000000; i++) {
+
+      result = result + i;
+
+    };
+
+    resultSpan.innerText = `The result is ${result}`;
+
+  };
+
+});
+
+So, to join these together, we could call the functions at the end of the DOMContentLoaded callback function like this:
+showStatus('Calculation running, please wait... Maybe for quite a while...');
+
+doCalculation();
+
+showStatus('Calculation finished, here is the result:');
+
+Try running this code and see whether it works as we expect. Not very good, is it? When we first open the page, it loads for a while and then displays the Calculation finished status and the result. But we never see the Calculation running status
+
+Why is it, then, that don't we get to see the first status? When we update the DOM by doing something such as setting the innerText property of a DOM node, the DOM tree itself is updated, and then the browser repaints the render tree to the browser window. These are two separate steps, and the repaint step happens after the current call stack has finished. So, with our new knowledge of the event loop, we should be able to see what's happening. When we call showStatus() for the first time, the DOM is updated, but the browser doesn't redraw the page yet. Then, doCalculation() is called, and the execution thread is blocked until the calculation has finished. The showStatus() function is called a second time with the Calculation finished string, and at this point, the browser repaints the render tree with the Calculation finished string that we passed to the second call of showStatus().
+
+To get our application to work more in line with our specifications
+
+showStatus('Calculation running, please wait... Maybe for quite a while...');
+
+setTimeout(() => {
+
+  doCalculation();
+
+  showStatus('Calculation finished, here is the result:');
+
+},0);
+
+By adding the call to doCalculation() and the second call to showStatus() to a setTimeout() function, the call stack is emptied after the first showStatus() function executes, at which point the browser repaints the page, displaying the Calculation running string as expected. This is a much better implementation since it keeps the user informed of what the application is doing:
+
