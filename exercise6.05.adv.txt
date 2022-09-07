@@ -1,0 +1,23 @@
+Exercise 6.05: Simple Form Handling
+In this exercise, you will create a simple form with submit and reset buttons. When submitting, the form action will be canceled, but the submitted values will still be handled and displayed on the screen. This is the first step to creating a form validation system. Let's get started:
+
+Let's begin with the standard opening HTML boilerplate:
+
+Next, create the opening form tag. This will be given an ID, for ease of acquisition, and will provide a random action URL since it won't be used in this exercise:
+ 
+To make this more interesting, let's introduce a simple text field control. It won't be used, per se, but it will help demonstrate the reset functionality:
+
+Input controls will be discussed in the next section of this chapter.
+
+Now, you will need the two buttons: one for submit and one for reset:
+
+Finally, let's close out the form tag and open the script tag, ready for our JavaScript:
+
+The reset button handler will be simple. Once clicked, display a message in the console. However, you won't be attaching the handler to the button's click event as doing that will not provide the power to stop the reset, should you wish to. Instead, the event will be assigned to the form's reset event:
+
+Likewise, with the submit handler, the form's submit event will be listened to. In this instance, however, you will call ev.preventDefault() from the handler to prevent the form from actually submitting:
+
+Finally, close out the script tag and the page:
+
+
+That's it. Now, if you run the page in the browser, you will see that clicking submit will display one message in the console, while the reset button will show another. Also, clicking reset will always revert the text in the text field to the words original text.
