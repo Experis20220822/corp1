@@ -1,0 +1,44 @@
+Exercise 6.02: Real-Time Clock
+It is now time to put your knowledge of timers to use. In this exercise, you will be creating a real-time in-page clock display that will count up in seconds and show the full time using a 24-hour digital clock format. This exercise will make use of an HTML file, albeit a simple one. Let's get started:
+
+Create a new file called clock.html. Here, you'll add some very simple HTML. Firstly, add the opening document tag and the script tag:
+<html>
+
+  <script>
+
+The script tag will contain the JavaScript to be executed within the page.
+
+Next, you'll need some placeholder variables for the seconds, minutes, hours, and the current Date object instance:
+    var secs, mins, hrs, date,
+
+The handler function you'll use for the timer will also be assigned to a variable called setTime. In it, you will simply populate the preceding variables with the current time components:
+    setTime = function() {
+
+      date = new Date();
+
+      hrs = date.getHours();
+
+      mins = date.getMinutes();
+
+      secs = date.getSeconds();
+
+To output the time to the page, you'll simply need to update the body content. There are better solutions to this that will be explained later in this module:
+    document.body.innerHTML = `${hrs}:${mins}:${secs}`;
+
+Finally, close the function and assign it to an interval. Set the interval to run every 500 milliseconds to ensure better accuracy:
+    }
+
+    setInterval(setTime, 500);
+
+With the script complete, you should close out the script tag block:
+  </script>
+
+The page should end with a body tag block, which will contain the clock and the closing html tag:
+  <body>
+
+  </body>
+
+</html>
+
+Now, save the page and load it (or drag it) into your browser. You should see the time displayed in the top left-hand corner of the page, and it should update every second. You have successfully built your first timer-based JavaScript application.
+Displaying a real-time clock on a web page is a practical application, particularly within corporate websites and intranets that may exhibit times for several time zones around the world. However, utilizing a timer to update page content is not limited to clocks. This same process could be utilized to update stock market prices, real-time chat forums, or just about any kind of real-time presentation.
